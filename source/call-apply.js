@@ -77,34 +77,43 @@
 // // user becomes this, messageData is passed as a list of arguments (time, phrase)
 // say.call(user, ...messageData); // [10:00] John: Hello (this=user)
 
-let worker = {
-  slow(min, max) {
-    console.log(`Called with ${min},${max}`);
-    return min + max;
-  }
-};
+// let worker = {
+//   slow(min, max) {
+//     console.log(`Called with ${min},${max}`);
+//     return min + max;
+//   }
+// };
 
-function cachingDecorator(func, hash) {
-  let cache = new Map();
-  return function() {
-    let key = hash(arguments); // (*)
-    console.log(key)
-    if (cache.has(key)) {
-      return cache.get(key);
-    }
+// function cachingDecorator(func, hash) {
+//   let cache = new Map();
+//   return function() {
+//     let key = hash(arguments); // (*)
+//     console.log(key)
+//     if (cache.has(key)) {
+//       return cache.get(key);
+//     }
 
-    let result = func.apply(this, arguments); // (**)
+//     let result = func.apply(this, arguments); // (**)
 
-    cache.set(key, result);
-    return result;
-  };
-}
+//     cache.set(key, result);
+//     return result;
+//   };
+// }
 
-function hash() {
-  return [].join.call(arguments);
-}
+// function hash() {
+//   return [].join.call(arguments);
+// }
 
-worker.slow = cachingDecorator(worker.slow, hash);
+// worker.slow = cachingDecorator(worker.slow, hash);
 
-console.log( worker.slow(3, 5) ); // works
-console.log( "Again " + worker.slow(3, 5) ); // same (cached)
+// console.log( worker.slow(3, 5) ); // works
+// console.log( "Again " + worker.slow(3, 5) ); // same (cached)
+
+
+
+// function say() {
+//   console.log(this.name)
+// }
+// let user = { name: "John" };
+
+// say.call(user)
